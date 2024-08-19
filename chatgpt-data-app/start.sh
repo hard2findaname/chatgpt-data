@@ -1,0 +1,1 @@
+docker run -d --name chatgpt-data -p 8091:8091 sophisticate1/chatgpt-data-app:1.1

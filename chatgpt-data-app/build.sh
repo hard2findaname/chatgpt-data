@@ -1,0 +1,1 @@
+docker build -f ./Dockerfile -t sophisticate1/chatgpt-data-app:1.1 .
