@@ -1,16 +1,18 @@
 package cn.bugstack.chatgpt.data.config;
 
+import cn.bugstack.chatgpt.data.trigger.mq.OrderPaySuccessListener;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.eventbus.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
- * @description
- * @create 2023-08-05 17:45
+ *@Author  Atticus
+ *@date  2024-09-01 16:47
+ *@description:TODO
  */
 @Configuration
 public class GoogleGuavaCodeCacheConfig {
@@ -28,5 +30,12 @@ public class GoogleGuavaCodeCacheConfig {
                 .expireAfterWrite(12, TimeUnit.HOURS)
                 .build();
     }
+    @Bean
+    public EventBus eventBusListener(OrderPaySuccessListener listener){
+        EventBus eventBus = new EventBus();
+        eventBus.register(listener);
+        return eventBus;
+    }
+
 
 }

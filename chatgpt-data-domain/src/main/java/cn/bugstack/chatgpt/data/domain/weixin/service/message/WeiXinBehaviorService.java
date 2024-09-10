@@ -42,13 +42,13 @@ public class WeiXinBehaviorService implements IWeiXinBehaviorService {
         // Text 文本类型
         if (MsgTypeVO.TEXT.getCode().equals(userBehaviorMessageEntity.getMsgType())) {
             MessageTextEntity res = new MessageTextEntity();
-            if(!userBehaviorMessageEntity.getContent().equals("403")){
+            if(!userBehaviorMessageEntity.getContent().equals("405")){
 
                 res.setToUserName(userBehaviorMessageEntity.getOpenId());
                 res.setFromUserName(originalId);
                 res.setCreateTime(String.valueOf(System.currentTimeMillis() / 1000L));
                 res.setMsgType("text");
-                res.setContent(String.format("目前仅支持回复403！"));
+                res.setContent(String.format("目前仅支持回复405！"));
                 return XmlUtil.beanToXml(res);
             }
             // 缓存验证码

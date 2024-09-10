@@ -48,7 +48,7 @@ spring:
   datasource:
     username: root
     password: Zy29824741
-    url: jdbc:mysql://127.0.0.1:3306/openai?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+    url: jdbc:mysql://localhost:3306/openai?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
     pool-name: Retail_HikariCP
@@ -64,7 +64,17 @@ spring:
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/config/mybatis-config.xml
-
+# application-dev.yml
+# 支付宝支付 - 沙箱 https://opendocs.alipay.com/common/02kkv7
+alipay:
+  enabled: true
+  app_id: 9021000140612588
+  merchant_private_key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQChbk0wkLQ5x7HprDJATmbWFGIyxvHhoj9UARz5vJc3zIuJRvbyWZEctZqdMopM/LZz4x9r8r4p2jPILfuN+DWjw53TfnvU3DWxFTgF6nGc4oCLGh+T0zTZAoe9AFLBUWCak6xV50fWloUknXWfAO1eiqrcUYCInPkSGcsUcmf/VGNjYmCGFpXG3eDg05HY8h7mm3hCpiAswqFb+2YenX4Jykgk8Cd5HQR/zvzIyS1Vv2JMBRL7mnzhKs4csruaRfSU0i9mHy22cE17TIeW4cDWXnU3a1MqAy3TmAnPaYsF1MIP9/gIJ7vcudaYmhcDwBwvRsSRsKhdNaVesqVLLHhZAgMBAAECggEBAJ4oQtfh7bDuRRB69ICsT3ROZCb7Yt985i6XKJxEeKLic5L7Q9YMim9mPSTl7zmeHeNMEezg1g6LCVCGPH7LP0JC1M3wjcHuPWxRLaIeH1FlWCrwXR+nPY+fOv2g43MjF1Jae+1tuqQytB87ZZFyhxypHtzbvOIbaKqjOqO9ssYjgZ4d/i3oXKru96kzg/PCQq36F3dzWkvY4rI6aw7VzXNOFzzeIxtOu5EwX1KxcsSEncULmjOyI2FyZ/AcEbnMNoLckDOvbpwiJtWQUMStZ9xBo4HVPGj0rGjF2uHEYJ086foP2i3Pu8Fym2OnGNjtjP0jPOUp2QCMcHVhS461eQECgYEA9tfQQd3UKtNdM2Qt899dsdwrCurYmNnlqsY2BUdxwANXtF5HTyBUHe8bwA1z6ZAsakYdX49hLsh459/EfF/yk3U21i6BfdgAh4jcKIbAP/BIqxqtYCeJ3ILritoIYxAl3JWiLb6QgSXn2/MpJllDsDb/gzmWjZ5NCYVRtrhNH60CgYEAp2tbZoEQjbR+Le7KkHxUeuIB6qAqFbZNoHwCoUxKcP25yqhmgDYjVMyeHqxWtc8tZtswvxl/1OBHdK1RPvMDgn2f/j92w6mMqNOpkXB3EDPPfazAQLditrEeiuvQRf/mXgSpiHZ2FTMH9dY7j0EjiPPwhWCfkOmAHMRR79l8oN0CgYEA9sdr/W2439fQJcDR8C4vjdF/drqzMJ0nb0QaXcy/fCfbVweqYwD/F64lICxS5f6taNIQK6k8j3j851RfK7kA20skN5zm+NkqLlY1RI7zRPkErYtOKgNdYIfC1F6GZAOQ1qcCLJmH/pXW556CVUSI13MkoBzC13KbshkHSJWZBUECgYBiSELi3PejyIaeXmVqBqLtdIode6LZFiliAgrlN80nobuU/eEWeTGqkWhtp0xL9PC5RgnK1aRWisdH9osQgkbYLvlin00QNhON9JvB9pze1RuEsoo2M7Huf/HnKeIdhclt/hysMKbHcSrGJdrXES1UM6hKFFv4DSuZN6LGRA3GvQKBgF+A1+bNWR+3otT0qyn5IycCaHV3m9lQb5U+7okJdP+AflG6A3CbccsLgG9EDXW9kAMXX0BMjD2rkirTC0nuDClmttPbCUGGCQcLXwzkvo+R7ce++jSkcQLc9rfWKFNYRRbdleg6c7tiZFOgFszsK23csleZKZz4kgha2A/HnpMC
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv9VXe/wT8L7SLHNjqWosCCuud0pkyhjHY889ebXi68EdW+X3tukGOSTyNF3FS7dC+wtp32fA3fOiydyGxiTfE6uR6IriaNltLenuLn0CoO8JgT8vZtSw2NTPfYak29kWPWG4PQY8VLapSYOqtQnAChDRQoeSAfK+fiZcunXo4z1TGOiRBqgm+2MoVNcpoqU1ZnjohTAxDeJV8a3SXmgCw1xrSKzJTi0gBgtIYfWUMBNKVIxzD0PZvonvGVuHhvI+rgsXs2IUVIVnsMnB0Et13SUU8LXQrXMxFcFrNXsSlUubXm3Oj7RZOPIUiu37h4lEgryicOoVWbkJU1b6CcAFqQIDAQAB
+  #支付回调地址
+  notify_url: http://jkbnpi.natappfree.cc/api/v1/sale/pay_notify
+  return_url: https://cn.bing.com
+  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
 # 日志
 logging:
   level:
