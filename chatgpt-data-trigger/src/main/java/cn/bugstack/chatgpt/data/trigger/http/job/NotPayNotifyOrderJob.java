@@ -10,10 +10,12 @@ import cn.bugstack.chatgpt.data.types.common.Constants;
 import cn.bugstack.chatgpt.data.types.enums.channel.PayMethodChannel;
 
 import com.google.common.eventbus.EventBus;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 
 
 import javax.annotation.Resource;
@@ -27,7 +29,7 @@ import java.util.Map;
  * @description: 检测未接收到或未正确处理的支付回调通知
  */
 @Slf4j
-@Component
+@Component()
 public class NotPayNotifyOrderJob {
     private final Map<PayMethodChannel, PayMethodGroupService> payMethodGroup = new HashMap<>();
 
@@ -43,8 +45,8 @@ public class NotPayNotifyOrderJob {
     private EventBus eventBus;
 
 
-
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Timed(value = "no_pay_notify_order_job", description = "定时任务，订单状态更新")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void exec() {
         try {
             List<String> orderIds = orderService.queryNoPayNotifyOrder();

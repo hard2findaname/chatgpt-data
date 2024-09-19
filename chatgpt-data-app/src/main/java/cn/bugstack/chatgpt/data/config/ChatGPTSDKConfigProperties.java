@@ -4,9 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author
  * @description
- * @create 2023-07-22 20:36
+ * @create 2024-07-22 20:36
  */
 @Data
 @ConfigurationProperties(prefix = "chatgpt.sdk.config", ignoreInvalidFields = true)
@@ -17,6 +17,6 @@ public class ChatGPTSDKConfigProperties {
     /** 可以申请 sk-*** */
     private String apiKey;
     /** 获取Token <a href="http://api.xfg.im:8080/authorize?username=xfg&password=123">访问获取</a> */
-    private String authToken;
+
 
 }

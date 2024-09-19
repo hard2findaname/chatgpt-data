@@ -67,6 +67,10 @@
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.bugstack</groupId>
+            <artifactId>chatglm-sdk-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

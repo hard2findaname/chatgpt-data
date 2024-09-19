@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
- * @description OpenAi 仓储服务
- * @create 2023-10-03 17:14
+ * @Author Atticus
+ * @date 2024-07-14 15:13 15:13
+ * @description: OpenAi 仓储服务
  */
 @Repository
 public class OpenAiRepository implements IOpenAiRepository {
@@ -21,14 +21,15 @@ public class OpenAiRepository implements IOpenAiRepository {
     private IUserAccountDao userAccountDao;
 
     @Override
-    public int subAccountQuota(String openai) {
-        return userAccountDao.subAccountQuota(openai);
+    public int subAccountQuota(String openid) {
+        return userAccountDao.subAccountQuota(openid);
     }
 
     @Override
     public UserAccountEntity queryUserAccount(String openid) {
         UserAccountPO userAccountPO = userAccountDao.queryUserAccount(openid);
         if (null == userAccountPO) return null;
+
         UserAccountEntity userAccountEntity = new UserAccountEntity();
         userAccountEntity.setOpenid(userAccountPO.getOpenid());
         userAccountEntity.setTotalQuota(userAccountPO.getTotalQuota());
@@ -37,5 +38,6 @@ public class OpenAiRepository implements IOpenAiRepository {
         userAccountEntity.genModelTypes(userAccountPO.getModelTypes());
         return userAccountEntity;
     }
+
 
 }

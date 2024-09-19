@@ -41,10 +41,10 @@ public class AuthController {
      * -H 'Content-Type: application/x-www-form-urlencoded' \
      * -d 'openid=oxfA9w8-23yvwTmo2ombz0E4zJv4'
      *
-     * curl -X POST \
-     *  http://localhost:8091/api/v1/auth/gen/code \
-     * -H 'Content-Type: application/x-www-form-urlencoded' \
-     * -d 'openid=atticus'
+     curl -X POST \
+      http://localhost:8091/api/v1/auth/gen/code \
+     -H 'Content-Type: application/x-www-form-urlencoded' \
+     -d 'openid=atticus'
      */
     @RequestMapping(value = "gen/code", method = RequestMethod.POST)
     public Response<String> genCode(@RequestParam String openid) {

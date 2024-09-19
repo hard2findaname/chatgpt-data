@@ -27,8 +27,8 @@ import java.util.UUID;
 @Slf4j
 public abstract class AbstractAuthService implements IAuthService {
 
-    /** SecretKey 要替换为你自己的，并且最好是通过配置的方式使用 */
-    private static final String defaultBase64EncodedSecretKey = "B*B^D%fe";
+    /** SecretKey 最好是通过配置的方式使用 */
+    private static final String defaultBase64EncodedSecretKey = "A*B^D%fe";
     private final String base64EncodedSecretKey = Base64.encodeBase64String(defaultBase64EncodedSecretKey.getBytes());
     private final Algorithm algorithm = Algorithm.HMAC256(Base64.decodeBase64(Base64.encodeBase64String(defaultBase64EncodedSecretKey.getBytes())));
 
@@ -36,7 +36,7 @@ public abstract class AbstractAuthService implements IAuthService {
     public AuthStateEntity doLogin(String code) {
 
         // 1. 如果不是4位有效数字字符串，则返回验证码无效
-        if (!code.matches("\\d{4}")) {
+        if (!code.matches("\\d{4,8}")) {
             log.info("鉴权，用户收入的验证码无效 {}", code);
             return AuthStateEntity.builder()
                     .code(AuthTypeVO.A0002.getCode())

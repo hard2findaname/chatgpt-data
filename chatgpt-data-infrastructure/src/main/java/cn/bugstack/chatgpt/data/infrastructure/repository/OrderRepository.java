@@ -1,5 +1,6 @@
 package cn.bugstack.chatgpt.data.infrastructure.repository;
 
+import cn.bugstack.chatgpt.data.domain.openai.model.valobj.UserAccountStatusVO;
 import cn.bugstack.chatgpt.data.domain.order.model.aggregates.CreateOrderAggregate;
 import cn.bugstack.chatgpt.data.domain.order.model.entity.*;
 import cn.bugstack.chatgpt.data.domain.order.model.valobj.OrderStatusVO;
@@ -41,12 +42,15 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public UnpaidOrderEntity queryUnpaidOrder(ShopCartEntity shopCartEntity) {
+        // 根据 openid+productid 查询未支付订单
         OpenAIOrderPO openAIOrderPOReq  = OpenAIOrderPO.builder()
                 .openid(shopCartEntity.getOpenid())
                 .productId(shopCartEntity.getProductId())
                 .build();
+
         OpenAIOrderPO openAIOrderPORes = openAIOrderDao.queryUnpaidOrder(openAIOrderPOReq);
         if(null == openAIOrderPORes) return null;
+
         return UnpaidOrderEntity.builder()
                 .openid(shopCartEntity.getOpenid())
                 .orderId(openAIOrderPORes.getOrderId())
@@ -76,6 +80,7 @@ public class OrderRepository implements IOrderRepository {
         String openid = aggregate.getOpenid();
         ProductEntity product = aggregate.getProduct();
         OrderEntity order = aggregate.getOrder();
+
         OpenAIOrderPO openAIOrderPO = new OpenAIOrderPO();
         openAIOrderPO.setOpenid(openid);
         openAIOrderPO.setProductId(product.getProductId());
@@ -157,10 +162,13 @@ public class OrderRepository implements IOrderRepository {
         userAccountPOReq.setOpenid(openAIOrderPO.getOpenid());
         userAccountPOReq.setTotalQuota(openAIOrderPO.getProductQuota());
         userAccountPOReq.setSurplusQuota(openAIOrderPO.getProductQuota());
+
         if (null != userAccountPO){
             int addAccountQuotaCount = userAccountDao.addAccountQuota(userAccountPOReq);
             if (1 != addAccountQuotaCount) throw new RuntimeException("addAccountQuotaCount update count is not equal 1");
         } else {
+            userAccountPOReq.setStatus(UserAccountStatusVO.AVAILABLE.getCode());
+            userAccountPOReq.setModelTypes("gpt-3.5-turbo,gpt-3.5-turbo-16k,gpt-4,chatglm_lite,chatglm_std,chatglm_pro,chatglm_turbo");
             userAccountDao.insert(userAccountPOReq);
         }
 

@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author
  * @description 敏感词配置
- * @create 2023-09-16 17:38
+ * @create
  */
 @Slf4j
 @Configuration

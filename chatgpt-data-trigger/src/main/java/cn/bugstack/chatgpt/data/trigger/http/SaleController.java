@@ -60,8 +60,8 @@ public class SaleController {
 
     /**
     * @Description 商品列表查询
-     * 开始地址：http://localhost:8091/api/v1/sale/query_product_list
-     * 测试地址：http://apix.natapp1.cc/api/v1/sale/query_product_list
+     * 本地地址：http://localhost:8091/api/v1/sale/query_product_list
+     * 内网穿透地址：http://apix.natapp1.cc/api/v1/sale/query_product_list
     * @Param [token]
     * @return
      *

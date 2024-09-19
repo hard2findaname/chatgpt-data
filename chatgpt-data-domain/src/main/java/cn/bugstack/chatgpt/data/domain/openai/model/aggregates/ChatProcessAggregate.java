@@ -1,8 +1,10 @@
 package cn.bugstack.chatgpt.data.domain.openai.model.aggregates;
 
 import cn.bugstack.chatgpt.data.domain.openai.model.entity.MessageEntity;
+import cn.bugstack.chatgpt.data.domain.openai.model.valobj.GenerativeModelVO;
 import cn.bugstack.chatgpt.data.types.common.Constants;
 import cn.bugstack.chatgpt.data.types.enums.ChatGPTModel;
+import cn.bugstack.chatgpt.data.types.enums.channel.OpenAiChannel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,5 +39,17 @@ public class ChatProcessAggregate {
         }
         return false;
     }
+    public OpenAiChannel getChannel(){
+        return OpenAiChannel.getChannel(this.model);
+    }
 
+    public GenerativeModelVO getGenerativeModelVO() {
+        switch (this.model) {
+            case "dall-e-2":
+            case "dall-e-3":
+                return GenerativeModelVO.IMAGES;
+            default:
+                return GenerativeModelVO.TEXT;
+        }
+    }
 }

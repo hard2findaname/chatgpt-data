@@ -53,19 +53,35 @@ public class ChatGPTAIServiceController {
      * "model": "gpt-3.5-turbo"
      * }'
      * <p>
-     * curl -X POST \
-     * http://localhost:8091/api/v1/chatgpt/chat/completions \
-     * -H 'Content-Type: application/json;charset=utf-8' \
-     * -H 'Authorization: b8b6' \
-     * -d '{
-     * "messages": [
-     * {
-     * "content": "1+1",
-     * "role": "user"
-     * }
-     * ],
-     * "model": "gpt-3.5-turbo"
-     * }'
+     curl -X POST \
+     http://localhost:8091/api/v1/chatgpt/chat/completions \
+     -H 'Content-Type: application/json;charset=utf-8' \
+     -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHRpY3VzIiwib3BlbklkIjoiYXR0aWN1cyIsImV4cCI6MTcyNjM5NTAzMSwiaWF0IjoxNzI1NzkwMjMxLCJqdGkiOiI5ZmFmMzBmNi03NzE1LTQyMzktODVkMy1jNzUwNjU2Y2NlMDEifQ.o_eoyzA97wx727LZDM5DtIgqyMEWVUBFmSy6i5GXVxI' \
+     -d '{
+     "messages": [
+     {
+     "content": "1+1",
+     "role": "user"
+     }
+     ],
+     "model": "gpt-3.5-turbo"
+     }'
+
+     使用ChatGLM
+
+     curl -X POST \
+     http://localhost:8091/api/v1/chatgpt/chat/completions \
+     -H 'Content-Type: application/json;charset=utf-8' \
+     -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdHRpY3VzIiwib3BlbklkIjoiYXR0aWN1cyIsImV4cCI6MTcyNjM5NTAzMSwiaWF0IjoxNzI1NzkwMjMxLCJqdGkiOiI5ZmFmMzBmNi03NzE1LTQyMzktODVkMy1jNzUwNjU2Y2NlMDEifQ.o_eoyzA97wx727LZDM5DtIgqyMEWVUBFmSy6i5GXVxI' \
+     -d '{
+     "messages": [
+     {
+     "content": "1+1",
+     "role": "user"
+     }
+     ],
+     "model": "chatglm_lite"
+     }'
      */
     @RequestMapping(value = "chat/completions", method = RequestMethod.POST)
     public ResponseBodyEmitter completionsStream(@RequestBody ChatGPTRequestDTO request, @RequestHeader("Authorization") String token, HttpServletResponse response) {
